@@ -1,0 +1,171 @@
+Implement Batch 4 content architecture improvements for CatWork.
+
+Create a single verified source of truth for operational business data.
+
+IMPORTANT:
+- Do not invent any business information.
+- Preserve current visible values.
+- Flag conflicting values for manual review.
+- All three languages must remain supported.
+- Create a checkpoint first.
+
+STEP 1
+
+Search the repository for every occurrence of:
+- business name
+- address
+- telephone
+- email
+- opening days
+- opening hours
+- last admission
+- pricing
+- extension fees
+- age limits
+- Wi-Fi
+- parking
+- station access
+- Google Maps URL
+- Instagram URL
+- reservation URL
+- visitor rules
+
+Produce a conflict table before changing anything.
+
+STEP 2
+
+Create a centralized configuration module for factual operational data.
+
+Separate:
+- factual data shared by all languages
+- localized labels and explanatory text
+- URLs
+- contact details
+- pricing structures
+- special closure notices
+
+STEP 3
+
+Refactor existing components to read from the centralized configuration.
+
+Do not change the visible values unless resolving an exact duplicate or confirmed conflict.
+
+STEP 4
+
+Ensure these sections exist and are consistent across all languages:
+- visit information
+- pricing
+- access
+- cat profiles
+- rules
+- FAQ
+- contact
+- special closure notice
+
+STEP 5
+
+Add schema validation or TypeScript types so required business information cannot silently disappear.
+
+STEP 6
+
+Add tests confirming the same factual values appear across Japanese, English, and Chinese.
+
+Document:
+- conflicting values found
+- chosen source of truth
+- fields requiring owner confirmation
+
+Stop after :contentReference[oaicite:3]{index=3}ch 5：手機版、無障礙及效能
+
+Lighthouse可用來檢查效能、無障礙、SEO及最佳實務，也應分開測試桌面與手機。citeturn968793search3
+
+## Replit Prompt
+
+```text
+Implement Batch 5 mobile, accessibility, and performance improvements for CatWork.
+
+Do not change the brand direction or business content.
+
+Create a checkpoint first.
+
+STEP 1 — Baseline
+
+Run Lighthouse against all major public routes in:
+- mobile mode
+- desktop mode
+
+Run accessibility testing using axe-core or an equivalent tool.
+
+Save baseline results under:
+docs/site-audit/lighthouse-before/
+
+STEP 2 — Accessibility
+
+Fix:
+- missing accessible names
+- missing image alt text
+- incorrect heading order
+- buttons implemented as non-interactive divs
+- links without destinations
+- keyboard inaccessible menus
+- invisible focus states
+- insufficient form labels
+- language selector accessibility
+- modal focus trapping
+- duplicate IDs
+- low contrast where confirmed
+- touch targets that are too small
+
+Do not use ARIA to replace correct semantic HTML when native elements are appropriate.
+
+STEP 3 — Mobile layout
+
+Test:
+- 320px
+- 375px
+- 390px
+- 430px
+- tablet width
+
+Fix:
+- horizontal overflow
+- overlapping text
+- clipped navigation
+- oversized headings
+- inaccessible CTA buttons
+- unstable image sizing
+- sticky elements covering content
+- excessive vertical empty space
+
+STEP 4 — Performance
+
+Optimize only measured bottlenecks:
+- convert oversized images to WebP or AVIF
+- create responsive image sizes
+- add width and height attributes
+- lazy-load below-the-fold media
+- preload only critical assets
+- reduce unused JavaScript
+- avoid loading all language data when unnecessary
+- defer non-critical scripts
+- reduce layout shifts
+- remove duplicate font downloads
+- cache static assets appropriately
+
+Do not reduce image quality excessively.
+
+STEP 5 — Validation
+
+Run:
+- Lighthouse after fixes
+- axe tests
+- Playwright tests
+- production build
+- visual regression screenshots
+
+Save results under:
+docs/site-audit/lighthouse-after/
+
+Create a before-and-after comparison.
+
+Stop after Batch 5.

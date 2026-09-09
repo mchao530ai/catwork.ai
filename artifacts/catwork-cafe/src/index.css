@@ -1,0 +1,105 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --font-sans: 'Inter', 'Noto Sans JP', 'Noto Sans SC', sans-serif;
+  --font-serif: 'Playfair Display', 'Noto Serif JP', 'Noto Serif SC', Georgia, serif;
+}
+
+:root {
+  --background: #FDFBF7;
+  --foreground: #1A1A1A;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    background-color: #FDFBF7;
+    color: #1A1A1A;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Global focus-visible ring for keyboard navigation */
+  :focus-visible {
+    outline: 2px solid #D4A373;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Remove outline for mouse/touch — keep only for keyboard */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Prevent images from overflowing containers on narrow viewports */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ── CJK font stacks ─────────────────────────── */
+  html[lang="ja"] body {
+    font-family: 'Noto Sans JP', 'Inter', sans-serif;
+  }
+  html[lang="zh"] body {
+    font-family: 'Noto Sans SC', 'Inter', sans-serif;
+  }
+
+  /* Serif / heading fallback for CJK */
+  html[lang="ja"] h1,
+  html[lang="ja"] h2,
+  html[lang="ja"] h3 {
+    font-family: 'Noto Serif JP', 'Playfair Display', Georgia, serif;
+  }
+  html[lang="zh"] h1,
+  html[lang="zh"] h2,
+  html[lang="zh"] h3 {
+    font-family: 'Noto Serif SC', 'Playfair Display', Georgia, serif;
+  }
+
+  /* ── CJK letter-spacing reset ────────────────── */
+  /* Wide tracking breaks CJK character spacing */
+  html[lang="ja"] .tracking-wide,
+  html[lang="ja"] .tracking-wider,
+  html[lang="ja"] .tracking-widest,
+  html[lang="zh"] .tracking-wide,
+  html[lang="zh"] .tracking-wider,
+  html[lang="zh"] .tracking-widest {
+    letter-spacing: 0;
+  }
+
+  ::selection {
+    background-color: #D4A373;
+    color: white;
+  }
+}
+
+@layer utilities {
+  /* Fluid hero: ~32px @ 360px → ~96px @ 1440px */
+  .fluid-hero {
+    font-size: clamp(2rem, 4vw + 1.25rem, 6rem);
+    line-height: 1.05;
+  }
+
+  /* Fluid section headings: ~28px → ~56px */
+  .fluid-heading {
+    font-size: clamp(1.75rem, 2.5vw + 1rem, 3.5rem);
+    line-height: 1.1;
+  }
+}

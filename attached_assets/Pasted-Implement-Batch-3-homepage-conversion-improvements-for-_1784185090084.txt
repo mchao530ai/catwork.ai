@@ -1,0 +1,117 @@
+Implement Batch 3 homepage conversion improvements for CatWork.
+
+The website already supports Japanese, English, and Chinese.
+Preserve the existing visual identity and existing content unless a change is specifically required below.
+
+IMPORTANT RULES:
+- Create a checkpoint first.
+- Do not redesign the entire website.
+- Do not replace the logo.
+- Do not add fabricated prices, hours, distance, reviews, or business claims.
+- Reuse verified information already stored in the project.
+- If verified information is missing, create a clearly named content configuration field and document it. Do not invent a value.
+- All changes must work in all three languages.
+
+GOAL
+
+A first-time visitor should understand within five seconds:
+1. This is a physical cat café.
+2. It is in Echigo-Yuzawa.
+3. What visitors can do there.
+4. Whether it is open.
+5. How to check prices.
+6. How to visit, reserve, or get directions.
+
+STEP 1 — Audit the first viewport
+
+Check desktop and mobile first viewport for:
+- business name
+- clear category
+- location
+- primary image
+- opening status
+- primary CTA
+- secondary CTA
+- language selector
+
+Remove or reduce duplicated messages.
+
+STEP 2 — Improve hero hierarchy
+
+Create a clear hierarchy:
+- one H1
+- one short explanatory paragraph
+- one primary CTA
+- one secondary CTA
+- optional small operational information row
+
+Recommended CTA priority:
+1. Reservation or visit information
+2. Google Maps directions
+3. Prices
+4. Instagram
+
+Do not display more than two equally prominent hero buttons.
+
+STEP 3 — Use localized content
+
+Create or update translation keys for:
+- hero headline
+- hero description
+- reservation CTA
+- directions CTA
+- price CTA
+- opening status
+- closed status
+- last admission
+- station access summary
+
+Ensure Japanese, English, and Chinese communicate the same factual meaning, while allowing natural localized wording.
+
+STEP 4 — Mobile conversion
+
+On mobile:
+- CTA buttons must be easy to tap
+- no text should overflow
+- no CTA should be hidden behind the header
+- navigation must remain usable
+- consider a small sticky action bar for reservation and directions
+- do not cover content or cookie controls
+
+STEP 5 — Section order
+
+Review and adjust homepage section order toward:
+
+1. Hero
+2. Current visit information
+3. Cat café experience
+4. Pricing summary
+5. Meet the cats
+6. Interior/experience photos
+7. Access
+8. Visitor rules
+9. FAQ
+10. Final CTA
+
+Only reorder sections that already exist.
+Do not delete content without documenting the reason.
+
+STEP 6 — Tests
+
+Add Playwright tests for:
+- H1 presence
+- primary CTA
+- secondary CTA
+- all three languages
+- desktop layout
+- mobile layout
+- CTA destination
+- no horizontal overflow
+
+Run all existing tests and production build.
+
+Create:
+docs/site-audit/07-homepage-conversion.md
+
+Include before/after screenshots and a list of exact changes.
+Stop after Batch 3.

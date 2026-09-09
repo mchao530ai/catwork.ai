@@ -1,0 +1,104 @@
+Implement Batch 1 fixes for CatWork based strictly on the reports in docs/site-audit/.
+
+Scope:
+- Broken internal links
+- Broken external links
+- Incorrect anchors
+- Incorrect redirects
+- Direct route loading
+- Browser refresh problems
+- 404 behavior
+- Header and footer navigation
+- Mobile navigation
+- Language switcher behavior
+- Language route footer navigation
+- Mobile navigation
+- Language switcher behavior
+- Language route parity
+- Missing translation keys required for navigation and routing
+
+IMPORTANT RULES:
+- Create a checkpoint or Git commit before making changes.
+- Do not redesign the pages.
+- Do not change the brand identity.
+- Do not rewrite existing business content.
+- Do not remove Japanese, English, or Chinese.
+- Do not migrate the application to another framework.
+- Do not rename working public URLs without adding redirects.
+- Preserve all existing working features.
+- Only fix issues supported by the audit evidence.
+
+STEP 1
+
+Read:
+- docs/site-audit/01-route-inventory.md
+- docs/site-audit/02-link-audit.csv
+- docs/site-audit/03-language-parity.md
+- docs/site-audit/06-priority-fixes.md
+
+Create a concise implementation plan listing:
+- files to change
+- links/routes to fix
+- possible regression risks
+
+STEP 2
+
+Fix all P0 routing and link issues.
+
+Requirements:
+- Every visible navigation control must work.
+- Every internal link must use the application’s routing system correctly.
+- External links must use valid HTTPS URLs where available.
+- External links opening a new tab must use rel="noopener noreferrer".
+- Email links must use mailto:
+- Telephone links must use tel:
+- In-page anchors must scroll to an existing unique ID.
+- The logo must return to the correct localized homepage.
+- Unknown URLs must show a useful localized 404 page.
+
+STEP 3
+
+Fix language switching.
+
+Requirements:
+- Japanese, English, and Chinese must remain available.
+- Switching language must keep the user on the equivalent page or section where possible.
+- Refreshing the page must preserve the selected language.
+- Browser back and forward must work correctly.
+- Directly opening a localized URL must show the correct language.
+- The HTML lang attribute must match the active language.
+- Do not allow untranslated navigation text to fall back silently.
+
+STEP 4
+
+Add automated tests.
+
+Create Playwright tests covering:
+- desktop header
+- mobile menu
+- footer
+- language switching
+- every public route
+- direct URL loading
+- refresh
+- back and forward
+- 404 page
+- primary CTAs
+- external link URL validation
+
+STEP 5
+
+Run:
+- type checking
+- linting
+- unit tests
+- Playwright tests
+- production build
+
+Update the audit reports with:
+- fixed issues
+- remaining issues
+- intentionally deferred issues
+
+Stop after Batch 1.
+Do not begin SEO, visual redesign, analytics, or performance work.

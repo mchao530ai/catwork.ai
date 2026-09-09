@@ -1,0 +1,51 @@
+Good idea — those are the questions customers ask most before they show up. I don't know the real-world details for your café (address, parking, hours, rules), so I need a bit of info from you to make the FAQ accurate instead of using placeholders.
+
+Café address & nearest landmark / station (for the 'How do I get there?' answer)
+
+echigo yuzawa
+
+Parking situation — is there on-site parking, paid lots nearby, street parking only, or none? Any specific lot names or prices to mention?
+
+no parking available please use the coin parking nearby echigo yuzawa station
+
+Opening hours (weekdays / weekends / holidays) and last entry time
+
+open on weekends and weekday please use google map for reference for open hours and time
+
+Reservation policy — walk-ins welcome, reservation required, or both? If reservations, how do customers book?
+
+walk in welcom there is also online reservation later.
+
+Pricing customers should know upfront — entry fee per person, time blocks, drink/food minimums, kids pricing, etc.
+
+please see the service and menu session
+
+House rules customers should know before arriving — age limits, max group size, time limits, food/outside drink policy, photo/flash policy, how to handle the cats, allergies, what to wear, etc.
+
+mini one drink. please try to be gentle with the cats.
+
+Anything else you want covered (payment methods accepted, accessibility, language support, pets-other-than-cats policy, special events, gift cards, etc.)
+
+we support credit card and other payment thru paypay cas
+
+5 minutes ago
+
+Worked for 15 seconds
+
+2 actions
+I've put together a draft for Task #11 — Add FAQ section to Admin dashboard (visitor info + app help) and updated it with everything you shared. The FAQ will live as a new card on the Admin dashboard split into two collapsible groups:
+
+Visitor Info (so staff can answer common pre-visit questions):
+
+How to get there → Echigo-Yuzawa, nearest station Echigo-Yuzawa Station, refer to Google Maps
+Parking → none on-site, use coin parking near the station
+Hours → open weekdays + weekends, refer to Google Maps for current times
+Reservations → walk-ins welcome, online reservation coming later
+Pricing/menu → see Service & Menu section
+Rules → one-drink minimum, please be gentle with the cats
+Payment → credit card, PayPay, cash
+Staff & Operations (in-app knowledge): timer/sessions, ending sessions & payment, Merge & Pay, pricing tiers, menu management, cash register, daily email report, Notion export, login rules, offline behavior, troubleshooting.
+
+All entries will be translated into English / Japanese / Chinese and switch with the language selector.
+
+The draft is waiting for your approval — once you accept it, you can hand it to me to build, or to a separate task agent. If you'd like to add or change anything (e.g., specific phone number, cat allergy warning, age policy, group size cap), just say the word and I'll fold it in before you approve.

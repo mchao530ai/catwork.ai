@@ -1,0 +1,143 @@
+Implement Batch 2 multilingual SEO and crawlability improvements for CatWork.
+
+Use the existing Japanese, English, and Chinese content. Do not create a fourth language and do not replace existing translations.
+
+IMPORTANT RULES:
+- Create a checkpoint or Git commit first.
+- Read the Batch 0 and Batch 1 reports.
+- Preserve all working routes and redirects.
+- Do not perform a visual redesign.
+- Do not invent business information.
+- Do not change opening hours, prices, address, telephone, policies, or reservation URLs unless those values already exist in the repository.
+- Adapt the implementation to the project’s existing framework.
+- Do not migrate frameworks.
+
+STEP 1 — Confirm locale URL strategy
+
+Determine whether the current site uses:
+- path locales
+- query parameters
+- hash routes
+- localStorage-only language selection
+- browser-language detection
+- another method
+
+Preferred outcome:
+- each important language version has a stable, shareable URL
+- Japanese, English, and Traditional Chinese versions are directly accessible
+- old working URLs remain supported through redirects
+
+Do not change URL architecture blindly. Document the migration before implementing it.
+
+STEP 2 — Add localized metadata
+
+For every public route and every language, implement:
+- unique page title
+- unique meta description
+- canonical URL
+- Open Graph title
+- Open Graph description
+- Open Graph URL
+- Open Graph image
+- Twitter card metadata
+- correct HTML lang value
+
+Avoid using the exact same metadata for all languages.
+
+STEP 3 — Implement hreflang
+
+For every equivalent language page, add reciprocal and self-referencing hreflang links.
+
+Use the actual language codes from the translation system.
+
+Confirm whether the Chinese content is Traditional Chinese. If it is, use zh-Hant.
+
+Include x-default for the default landing page.
+
+Verify:
+- every language page references all equivalent language pages
+- every language page references itself
+- URLs are absolute
+- canonical URLs and hreflang URLs do not conflict
+
+STEP 4 — Improve crawlability
+
+Ensure that important homepage and page content is present in initial HTML or otherwise reliably rendered for search engines.
+
+Do not rewrite the application unless required.
+
+Use the smallest framework-appropriate solution:
+- server-side rendering
+- static generation
+- pre-rendering
+- route-based metadata generation
+- another supported method
+
+Primary content that should be crawlable includes:
+- business name
+- location
+- service description
+- opening information
+- pricing summary
+- access information
+- cat profiles
+- visitor rules
+- FAQ
+
+STEP 5 — Technical SEO files
+
+Implement or fix:
+- /robots.txt
+- /sitemap.xml
+- localized URLs in the sitemap
+- favicon and web manifest
+- localized 404 page
+- canonical redirects
+- HTTPS canonical URLs
+- trailing slash consistency
+
+Exclude:
+- admin pages
+- preview pages
+- private API routes
+- duplicate utility URLs
+
+STEP 6 — Structured data
+
+Add valid JSON-LD using only verified existing business information.
+
+Use the most appropriate available types, such as:
+- LocalBusiness
+- CafeOrCoffeeShop
+
+Include only verified values:
+- official name
+- address
+- location
+- opening hours
+- telephone
+- URL
+- image
+- sameAs social links
+- price range, only if available
+
+Do not create fake ratings or reviews.
+
+STEP 7 — Tests
+
+Add automated tests verifying:
+- localized title and descriptions
+- canonical URLs
+- hreflang reciprocity
+- HTML lang
+- sitemap availability
+- robots.txt availability
+- JSON-LD validity
+- no important page has noindex
+- direct loading of every localized URL
+
+Run production build and all tests.
+
+Update docs/site-audit/04-seo-audit.md with before-and-after results.
+
+Stop after Batch 2.

@@ -1,0 +1,1354 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: admin
+    description: Admin authentication
+  - name: cats
+    description: Cat management
+  - name: photos
+    description: Photo management
+  - name: siteConfig
+    description: Site configuration
+  - name: pricing
+    description: Pricing plan management
+  - name: faqs
+    description: FAQ management
+  - name: events
+    description: Event/news management
+  - name: google
+    description: Google Business Profile sync
+  - name: instagram
+    description: Instagram Reels sync
+  - name: storage
+    description: Object storage
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /admin/login:
+    post:
+      operationId: adminLogin
+      tags: [admin]
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginRequest"
+      responses:
+        "200":
+          description: Logged in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminLoginResponse"
+        "401":
+          description: Unauthorized
+
+  /cats:
+    get:
+      operationId: listCats
+      tags: [cats]
+      summary: List all cats
+      responses:
+        "200":
+          description: List of cats
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cat"
+    post:
+      operationId: createCat
+      tags: [cats]
+      summary: Create a cat
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CatInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cat"
+
+  /cats/{id}:
+    get:
+      operationId: getCat
+      tags: [cats]
+      summary: Get a cat by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Cat
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cat"
+        "404":
+          description: Not found
+    put:
+      operationId: updateCat
+      tags: [cats]
+      summary: Update a cat
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CatInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cat"
+    delete:
+      operationId: deleteCat
+      tags: [cats]
+      summary: Delete a cat
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /cats/{id}/presence:
+    patch:
+      operationId: updateCatPresence
+      tags: [cats]
+      summary: Toggle cat presence (in café today)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CatPresenceInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cat"
+        "404":
+          description: Not found
+
+  /photos:
+    get:
+      operationId: listPhotos
+      tags: [photos]
+      summary: List all photos
+      responses:
+        "200":
+          description: List of photos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Photo"
+    post:
+      operationId: createPhoto
+      tags: [photos]
+      summary: Create a photo
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhotoInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Photo"
+
+  /photos/{id}:
+    put:
+      operationId: updatePhoto
+      tags: [photos]
+      summary: Update a photo
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhotoInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Photo"
+    delete:
+      operationId: deletePhoto
+      tags: [photos]
+      summary: Delete a photo
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /site-config:
+    get:
+      operationId: getSiteConfig
+      tags: [siteConfig]
+      summary: Get all site config as key-value map
+      responses:
+        "200":
+          description: Site configuration
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+
+  /site-config/{key}:
+    put:
+      operationId: setSiteConfigKey
+      tags: [siteConfig]
+      summary: Set a site config key
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: key
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SiteConfigInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteConfigEntry"
+
+  /pricing:
+    get:
+      operationId: listPricingPlans
+      tags: [pricing]
+      summary: List all pricing plans
+      responses:
+        "200":
+          description: List of pricing plans
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PricingPlan"
+    post:
+      operationId: createPricingPlan
+      tags: [pricing]
+      summary: Create a pricing plan
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PricingPlanInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PricingPlan"
+
+  /pricing/{id}:
+    put:
+      operationId: updatePricingPlan
+      tags: [pricing]
+      summary: Update a pricing plan
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PricingPlanInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PricingPlan"
+    delete:
+      operationId: deletePricingPlan
+      tags: [pricing]
+      summary: Delete a pricing plan
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /faqs:
+    get:
+      operationId: listFaqs
+      tags: [faqs]
+      summary: List all FAQs
+      responses:
+        "200":
+          description: List of FAQs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Faq"
+    post:
+      operationId: createFaq
+      tags: [faqs]
+      summary: Create a FAQ
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FaqInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Faq"
+
+  /faqs/{id}:
+    put:
+      operationId: updateFaq
+      tags: [faqs]
+      summary: Update a FAQ
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FaqInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Faq"
+    delete:
+      operationId: deleteFaq
+      tags: [faqs]
+      summary: Delete a FAQ
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /events:
+    get:
+      operationId: listEvents
+      tags: [events]
+      summary: List all events/news
+      responses:
+        "200":
+          description: List of events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Event"
+    post:
+      operationId: createEvent
+      tags: [events]
+      summary: Create an event
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+
+  /events/{id}:
+    put:
+      operationId: updateEvent
+      tags: [events]
+      summary: Update an event
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+    delete:
+      operationId: deleteEvent
+      tags: [events]
+      summary: Delete an event
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /google/status:
+    get:
+      operationId: getGoogleStatus
+      tags: [google]
+      summary: Get Google connection status
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Connection status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleStatus"
+
+  /google/auth:
+    get:
+      operationId: getGoogleAuthUrl
+      tags: [google]
+      summary: Get Google OAuth authorization URL
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Auth URL
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAuthUrl"
+
+  /google/disconnect:
+    post:
+      operationId: disconnectGoogle
+      tags: [google]
+      summary: Disconnect Google account
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Disconnected
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                required:
+                  - success
+
+  /google/location:
+    put:
+      operationId: setGoogleLocation
+      tags: [google]
+      summary: Set Google Business location
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleLocationInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  locationId:
+                    type: string
+                required:
+                  - locationId
+
+  /google/locations:
+    get:
+      operationId: getGoogleLocations
+      tags: [google]
+      summary: List Google Business locations
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Locations list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLocationsResponse"
+
+  /google/sync:
+    post:
+      operationId: syncGoogleProfile
+      tags: [google]
+      summary: Sync selected fields to Google Business Profile
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleSyncRequest"
+      responses:
+        "200":
+          description: Sync results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleSyncResponse"
+
+  /instagram/status:
+    get:
+      operationId: getInstagramStatus
+      tags: [instagram]
+      summary: Get Instagram connection status
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Connection status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstagramStatus"
+
+  /instagram/auth:
+    get:
+      operationId: getInstagramAuthUrl
+      tags: [instagram]
+      summary: Get Instagram OAuth authorization URL
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Auth URL
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstagramAuthUrl"
+
+  /instagram/disconnect:
+    post:
+      operationId: disconnectInstagram
+      tags: [instagram]
+      summary: Disconnect Instagram account and clear cached reels
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Disconnected
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                required:
+                  - success
+
+  /instagram/sync:
+    post:
+      operationId: syncInstagramReels
+      tags: [instagram]
+      summary: Fetch and cache latest reels from Instagram
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Sync results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstagramSyncResponse"
+
+  /instagram/reels:
+    get:
+      operationId: listInstagramReels
+      tags: [instagram]
+      summary: List cached Instagram reels (public)
+      responses:
+        "200":
+          description: List of cached reels
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InstagramReel"
+
+  /storage/uploads/request-url:
+    post:
+      operationId: requestUploadUrl
+      tags: [storage]
+      summary: Request a presigned upload URL
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestUploadUrlBody"
+      responses:
+        "200":
+          description: Presigned URL
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestUploadUrlResponse"
+
+  /storage/objects/{objectPath}:
+    get:
+      operationId: getObject
+      tags: [storage]
+      summary: Serve an object
+      parameters:
+        - name: objectPath
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Object file
+
+  /storage/public-objects/{filePath}:
+    get:
+      operationId: getPublicObject
+      tags: [storage]
+      summary: Serve a public object
+      parameters:
+        - name: filePath
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Object file
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    AdminLoginRequest:
+      type: object
+      properties:
+        password:
+          type: string
+      required:
+        - password
+
+    AdminLoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+        - token
+
+    Cat:
+      type: object
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        name:
+          type: string
+        kanji:
+          type: string
+        image:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+          maxItems: 15
+        role:
+          type: string
+        breed:
+          type: string
+        personality:
+          type: array
+          items:
+            type: string
+        bio:
+          type: string
+        shortBio:
+          type: string
+        sortOrder:
+          type: integer
+        active:
+          type: boolean
+        presentNow:
+          type: boolean
+      required:
+        - id
+        - slug
+        - name
+        - kanji
+        - image
+        - images
+        - role
+        - breed
+        - personality
+        - bio
+        - shortBio
+        - sortOrder
+        - active
+        - presentNow
+
+    CatInput:
+      type: object
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        kanji:
+          type: string
+        image:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+          maxItems: 15
+        role:
+          type: string
+        breed:
+          type: string
+        personality:
+          type: array
+          items:
+            type: string
+        bio:
+          type: string
+        shortBio:
+          type: string
+        sortOrder:
+          type: integer
+        active:
+          type: boolean
+        presentNow:
+          type: boolean
+      required:
+        - slug
+        - name
+        - kanji
+        - image
+        - role
+        - breed
+        - personality
+        - bio
+        - shortBio
+
+    CatPresenceInput:
+      type: object
+      properties:
+        presentNow:
+          type: boolean
+      required:
+        - presentNow
+
+    Photo:
+      type: object
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+        caption:
+          type: string
+        category:
+          type: string
+        sortOrder:
+          type: integer
+      required:
+        - id
+        - url
+        - caption
+        - category
+        - sortOrder
+
+    PhotoInput:
+      type: object
+      properties:
+        url:
+          type: string
+        caption:
+          type: string
+        category:
+          type: string
+        sortOrder:
+          type: integer
+      required:
+        - url
+
+    SiteConfigEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+        key:
+          type: string
+        value:
+          type: string
+      required:
+        - id
+        - key
+        - value
+
+    SiteConfigInput:
+      type: object
+      properties:
+        value:
+          type: string
+      required:
+        - value
+
+    PricingPlan:
+      type: object
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        step:
+          type: string
+        title:
+          type: string
+        titleJa:
+          type: string
+        price:
+          type: string
+        priceNote:
+          type: string
+        description:
+          type: string
+        includes:
+          type: array
+          items:
+            type: string
+        highlight:
+          type: boolean
+        badge:
+          type: string
+        cta:
+          type: string
+        sortOrder:
+          type: integer
+      required:
+        - id
+        - slug
+        - title
+        - price
+        - includes
+
+    PricingPlanInput:
+      type: object
+      properties:
+        slug:
+          type: string
+        step:
+          type: string
+        title:
+          type: string
+        titleJa:
+          type: string
+        price:
+          type: string
+        priceNote:
+          type: string
+        description:
+          type: string
+        includes:
+          type: array
+          items:
+            type: string
+        highlight:
+          type: boolean
+        badge:
+          type: string
+        cta:
+          type: string
+        sortOrder:
+          type: integer
+      required:
+        - slug
+        - title
+        - price
+
+    Faq:
+      type: object
+      properties:
+        id:
+          type: integer
+        category:
+          type: string
+        question:
+          type: string
+        answer:
+          type: string
+        questionJa:
+          type: string
+          nullable: true
+        answerJa:
+          type: string
+          nullable: true
+        questionZh:
+          type: string
+          nullable: true
+        answerZh:
+          type: string
+          nullable: true
+        sortOrder:
+          type: integer
+      required:
+        - id
+        - category
+        - question
+        - answer
+        - sortOrder
+
+    FaqInput:
+      type: object
+      properties:
+        category:
+          type: string
+        question:
+          type: string
+        answer:
+          type: string
+        questionJa:
+          type: string
+          nullable: true
+        answerJa:
+          type: string
+          nullable: true
+        questionZh:
+          type: string
+          nullable: true
+        answerZh:
+          type: string
+          nullable: true
+        sortOrder:
+          type: integer
+      required:
+        - category
+        - question
+        - answer
+
+    Event:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        date:
+          type: string
+        title:
+          type: string
+        titleJa:
+          type: string
+        summary:
+          type: string
+        image:
+          type: string
+        tag:
+          type: string
+        sortOrder:
+          type: integer
+      required:
+        - id
+        - type
+        - date
+        - title
+        - summary
+        - sortOrder
+
+    EventInput:
+      type: object
+      properties:
+        type:
+          type: string
+        date:
+          type: string
+        title:
+          type: string
+        titleJa:
+          type: string
+        summary:
+          type: string
+        image:
+          type: string
+        tag:
+          type: string
+        sortOrder:
+          type: integer
+      required:
+        - type
+        - date
+        - title
+        - summary
+
+    GoogleStatus:
+      type: object
+      properties:
+        connected:
+          type: boolean
+        email:
+          type: string
+        locationId:
+          type: string
+        lastSyncHours:
+          type: string
+        lastSyncDescription:
+          type: string
+        lastSyncPhotos:
+          type: string
+        lastSyncPosts:
+          type: string
+        lastSyncWebsiteUrl:
+          type: string
+        statusHours:
+          type: string
+        statusDescription:
+          type: string
+        statusPhotos:
+          type: string
+        statusPosts:
+          type: string
+        statusWebsiteUrl:
+          type: string
+      required:
+        - connected
+
+    GoogleAuthUrl:
+      type: object
+      properties:
+        authUrl:
+          type: string
+      required:
+        - authUrl
+
+    GoogleLocationInput:
+      type: object
+      properties:
+        locationId:
+          type: string
+        accountId:
+          type: string
+      required:
+        - locationId
+        - accountId
+
+    GoogleLocation:
+      type: object
+      properties:
+        id:
+          type: string
+        accountId:
+          type: string
+        name:
+          type: string
+        accountName:
+          type: string
+      required:
+        - id
+        - accountId
+        - name
+        - accountName
+
+    GoogleLocationsResponse:
+      type: object
+      properties:
+        locations:
+          type: array
+          items:
+            $ref: "#/components/schemas/GoogleLocation"
+      required:
+        - locations
+
+    GoogleSyncRequest:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            type: string
+      required:
+        - fields
+
+    GoogleSyncResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
+        syncedAt:
+          type: string
+      required:
+        - success
+
+    GoogleSyncResponse:
+      type: object
+      properties:
+        results:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/GoogleSyncResult"
+      required:
+        - results
+
+    InstagramStatus:
+      type: object
+      properties:
+        connected:
+          type: boolean
+        username:
+          type: string
+        accountId:
+          type: string
+        lastSyncAt:
+          type: string
+          nullable: true
+        reelCount:
+          type: integer
+      required:
+        - connected
+
+    InstagramAuthUrl:
+      type: object
+      properties:
+        authUrl:
+          type: string
+      required:
+        - authUrl
+
+    InstagramReel:
+      type: object
+      properties:
+        id:
+          type: integer
+        mediaId:
+          type: string
+        caption:
+          type: string
+        thumbnailUrl:
+          type: string
+        permalink:
+          type: string
+        postedAt:
+          type: string
+          nullable: true
+        cachedAt:
+          type: string
+          nullable: true
+      required:
+        - id
+        - mediaId
+        - caption
+        - thumbnailUrl
+        - permalink
+
+    InstagramSyncResponse:
+      type: object
+      properties:
+        syncedCount:
+          type: integer
+        total:
+          type: integer
+      required:
+        - syncedCount
+        - total
+
+    RequestUploadUrlBody:
+      type: object
+      properties:
+        name:
+          type: string
+        size:
+          type: integer
+        contentType:
+          type: string
+      required:
+        - name
+        - size
+        - contentType
+
+    RequestUploadUrlResponse:
+      type: object
+      properties:
+        uploadURL:
+          type: string
+        objectPath:
+          type: string
+      required:
+        - uploadURL
+        - objectPath

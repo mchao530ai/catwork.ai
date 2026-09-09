@@ -1,0 +1,44 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "kYsrf3brvAQ-X1bjtMedk"
+uri = "file://artifacts/mockup-sandbox/public/images/cafe-interior.png"
+type = "image"
+title = "Cafe Interior"
+
+[[generated]]
+id = "n57iZFy_Ftui-oPWy8b1Y"
+uri = "file://artifacts/mockup-sandbox/public/images/cat-hime.png"
+type = "image"
+title = "Regal Cat Hime"
+
+[[generated]]
+id = "Y44ZBPb9ytJ-Ngig79V_S"
+uri = "file://artifacts/mockup-sandbox/public/images/cat-inu.png"
+type = "image"
+title = "Playful Cat Inu"
+
+[[generated]]
+id = "wJmKJ1fCdTl_MNvLROfEN"
+uri = "file://artifacts/mockup-sandbox/public/images/cat-sumi.png"
+type = "image"
+title = "Black Cat Sumi"
+
+[[generated]]
+id = "2oLLSfiP27G0e6y7YIpp6"
+uri = "file://artifacts/mockup-sandbox/public/images/cat-sleepy.png"
+type = "image"
+title = "Sleepy Cat"
+
+[[generated]]
+id = "4qsZ2-nLUdGPn5vdBDaTf"
+uri = "file://artifacts/mockup-sandbox/public/images/cafe-exterior.png"
+type = "image"
+title = "Cafe Exterior Dusk"
+
+[[generated]]
+id = "BRV4kMlSO0gmGeH6zEwy3"
+uri = "file://artifacts/mockup-sandbox/public/images/cat-kiri.png"
+type = "image"
+title = "generated_image"

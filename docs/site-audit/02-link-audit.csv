@@ -1,0 +1,47 @@
+source_file,element,href_value,link_type,target_blank,rel_noopener,status,notes
+src/components/layout/Navbar.tsx,Link (logo),/,internal,—,—,✅ OK,wouter Link
+src/components/layout/Navbar.tsx,Link (nav),/ /visit /pricing /facilities /cats /reels /access /faq /contact,internal,—,—,✅ OK,wouter Link array
+src/components/layout/Navbar.tsx,a (CTA),mailto:{email},mailto,—,—,✅ OK,correct mailto form
+src/components/layout/Footer.tsx,Link (nav),/ /visit /pricing /cats /access /faq /contact,internal,—,—,✅ OK,wouter Link array
+src/components/layout/Footer.tsx,a (email CTA),mailto:{email},mailto,—,—,✅ OK,correct mailto form
+src/components/layout/Footer.tsx,a (phone),tel:{phoneHref},tel,—,—,✅ OK,tel:+8107044206344
+src/components/layout/Footer.tsx,a (instagram),{instagramUrl},external,✅,✅,✅ OK,https://instagram.com/catwork_cafe
+src/pages/Home.tsx,Link (hero CTA),/visit,internal,—,—,✅ OK,wouter Link
+src/pages/Home.tsx,a (hero email CTA),mailto:{email},mailto,—,—,✅ OK,correct
+src/pages/Home.tsx,Link (cat badge),/cats,internal,—,—,✅ OK,wouter Link
+src/pages/Home.tsx,Link (pricing CTA),/pricing,internal,—,—,✅ OK,wouter Link
+src/pages/Home.tsx,Link (visit CTA),/visit,internal,—,—,✅ OK,wouter Link
+src/pages/Home.tsx,Link (facilities),/facilities,internal,—,—,✅ OK,wouter Link
+src/pages/Home.tsx,Link (cats),/cats,internal,—,—,✅ OK,wouter Link
+src/pages/Home.tsx,Link (faq),/faq,internal,—,—,✅ OK,wouter Link
+src/pages/Home.tsx,a (instagram),https://www.instagram.com/catwork_cafe,external,✅,✅,✅ OK,correct
+src/pages/Home.tsx,motion.a (reel),{reel.permalink},external,✅,✅,✅ OK,correct
+src/pages/Home.tsx,Link (final CTA visit),/visit,internal,—,—,✅ OK,wouter Link
+src/pages/Home.tsx,a (final CTA email),mailto:{email},mailto,—,—,✅ OK,correct
+src/pages/Visit.tsx,a (phone),tel:{phoneHref},tel,—,—,✅ OK,correct
+src/pages/Visit.tsx,a (email),mailto:{email},mailto,—,—,✅ OK,correct
+src/pages/Visit.tsx,a (instagram),{instagramUrl},external,✅,✅,✅ OK,correct
+src/pages/Visit.tsx,a (email CTA),mailto:{email},mailto,—,—,✅ OK,correct
+src/pages/Pricing.tsx,a (plan CTA),mailto:{email},mailto,—,—,✅ OK,correct
+src/pages/Pricing.tsx,Link (plan CTA),/visit,internal,—,—,✅ OK,wouter Link
+src/pages/Pricing.tsx,Link (final CTA),/visit,internal,—,—,✅ OK,wouter Link
+src/pages/Pricing.tsx,a (final email CTA),mailto:{email},mailto,—,—,✅ OK,correct
+src/pages/Cats.tsx,Link (visit CTA),/visit,internal,—,—,✅ OK,wouter Link
+src/pages/Cats.tsx,Link (pricing CTA),/pricing,internal,—,—,✅ OK,wouter Link
+src/pages/Access.tsx,a (map),{mapUrl},external,—,—,✅ OK,opens Google Maps; no target but acceptable for map CTAs
+src/pages/Access.tsx,Link (visit CTA),/visit,internal,—,—,✅ OK,wouter Link
+src/pages/Access.tsx,Link (pricing CTA),/pricing,internal,—,—,✅ OK,wouter Link
+src/pages/FAQ.tsx,a (email CTA),mailto:{email},mailto,—,—,✅ OK,correct
+src/pages/FAQ.tsx,Link (contact CTA),/contact,internal,—,—,✅ OK,wouter Link
+src/pages/Contact.tsx,a (email),mailto:{email},mailto,—,—,✅ OK,correct
+src/pages/Contact.tsx,a (instagram),{instagramUrl},external,✅,✅,✅ OK,correct
+src/pages/Contact.tsx,a (phone),tel:{phoneHref},tel,—,—,✅ OK,correct
+src/pages/Contact.tsx,a (phone inline),tel:{phoneHref},tel,—,—,✅ OK,correct
+src/pages/Facilities.tsx,Link (pricing),/pricing,internal,—,—,✅ OK,wouter Link
+src/pages/Facilities.tsx,Link (visit CTA),/visit,internal,—,—,✅ OK,wouter Link
+src/pages/Facilities.tsx,Link (pricing CTA),/pricing,internal,—,—,✅ OK,wouter Link
+src/pages/Reels.tsx,a (follow),https://www.instagram.com/catwork_cafe,external,✅,✅,✅ OK,correct
+src/pages/Reels.tsx,a (empty state),https://www.instagram.com/catwork_cafe,external,✅,✅,✅ OK,correct
+src/pages/Reels.tsx,motion.a (reel),{reel.permalink},external,✅,✅,✅ OK,correct
+src/pages/Reels.tsx,a (see more),https://www.instagram.com/catwork_cafe,external,✅,✅,✅ OK,correct
+src/pages/not-found.tsx,Link (return home),/,internal,—,—,✅ Fixed,was inline in App.tsx; now uses wouter Link + i18n

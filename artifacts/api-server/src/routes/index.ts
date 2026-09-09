@@ -1,0 +1,46 @@
+import { Router, type IRouter } from "express";
+import healthRouter from "./health";
+import storageRouter from "./storage";
+import adminRouter from "./admin";
+import catsRouter from "./cats";
+import photosRouter from "./photos";
+import siteConfigRouter from "./siteConfig";
+import pricingRouter from "./pricing";
+import faqsRouter from "./faqs";
+import eventsRouter from "./events";
+import googleRouter from "./google";
+import instagramRouter from "./instagram";
+import contactRouter from "./contact";
+import bookingsRouter from "./bookings";
+import apiKeyRouter from "./apiKey";
+import v1BookingsRouter from "./v1Bookings";
+import testimonialsRouter from "./testimonials";
+import accessInfoRouter from "./accessInfo";
+import authRouter from "./auth";
+import trafficRouter from "./traffic";
+import adminEmailRouter from "./adminEmail";
+
+const router: IRouter = Router();
+
+router.use(healthRouter);
+router.use(storageRouter);
+router.use(adminRouter);
+router.use(catsRouter);
+router.use(photosRouter);
+router.use(siteConfigRouter);
+router.use(pricingRouter);
+router.use(faqsRouter);
+router.use(eventsRouter);
+router.use(googleRouter);
+router.use(instagramRouter);
+router.use(contactRouter);
+router.use(bookingsRouter);
+router.use(apiKeyRouter);
+router.use(v1BookingsRouter);
+router.use(testimonialsRouter);
+router.use(accessInfoRouter);
+router.use(authRouter);
+router.use(trafficRouter);
+router.use(adminEmailRouter);
+
+export default router;

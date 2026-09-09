@@ -1,0 +1,25 @@
+{
+  "name": "Catwork Cafe",
+  "short_name": "Catwork",
+  "description": "Cat café and remote workspace in Echigo Yuzawa, Niigata, Japan.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDFBF7",
+  "theme_color": "#D4A373",
+  "lang": "ja",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/images/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

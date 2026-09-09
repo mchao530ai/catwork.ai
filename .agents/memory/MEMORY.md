@@ -1,0 +1,7 @@
+- [Booking slots logic](booking-slots-logic.md) — lastAdmission = hoursClose − 1 hr; last slot ends at close, never after.
+- [Catwork Cafe base path](catwork-base-path.md) — site lives at catwork.ai root (/), NOT /cafe; BASE_PATH injected by Replit from artifact previewPath.
+- [Catwork Cafe i18n setup](catwork-i18n.md) — languages en/ja/zh only (no ko despite user mentioning it); localStorage key catwork_lang; NOT URL-path-based.
+- [Catwork Cafe image assets](catwork-images.md) — cat PNGs converted to webp (48–96KB each); cafe-interior/exterior PNG duplicates deleted; webp versions of all photos now exist.
+- [Catwork Cafe SEO & hreflang](catwork-seo-hreflang.md) — ?lang= query param strategy; zh maps to zh-Hant in html lang + hreflang; prerender.mjs runs post-build; SEO tests at scripts/test-seo.mjs (47 assertions).
+- [Browser test prerequisites](catwork-browser-test-prereqs.md) — Playwright Chromium currently cannot launch because the environment lacks libgbm.so.1.
+- [Release integration access](release-integration-access.md) — GitHub release work requires push access to mchao530ai/catwork.ai and the Notion parent shared with Replit.
